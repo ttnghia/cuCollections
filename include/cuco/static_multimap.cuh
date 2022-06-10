@@ -882,10 +882,10 @@ class static_multimap {
      * for equality
      * @return A boolean indicating whether the input pair was inserted in the map
      */
-    template <typename PairEqual = thrust::equal_to<value_type>>
+    template <typename Element, typename PairEqual = thrust::equal_to<value_type>>
     __device__ __forceinline__ bool pair_contains(
       cooperative_groups::thread_block_tile<ProbeSequence::cg_size> const& g,
-      value_type const& p,
+      Element const& element,
       PairEqual pair_equal = PairEqual{}) noexcept;
 
     /**

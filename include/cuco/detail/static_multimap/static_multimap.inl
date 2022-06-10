@@ -573,19 +573,19 @@ static_multimap<Key, Value, Scope, Allocator, ProbeSequence>::device_view::conta
 }
 
 template <typename Key,
-          typename Value,
+          typename Value,          
           cuda::thread_scope Scope,
           typename Allocator,
           class ProbeSequence>
-template <typename PairEqual>
+template <typename Element, typename PairEqual>
 __device__ __forceinline__ bool
 static_multimap<Key, Value, Scope, Allocator, ProbeSequence>::device_view::pair_contains(
   cooperative_groups::thread_block_tile<ProbeSequence::cg_size> const& g,
-  value_type const& p,
+  Element const& element,
   PairEqual pair_equal) noexcept
 {
   constexpr bool is_pair_contains = true;
-  return impl_.contains<is_pair_contains, uses_vector_load()>(g, p, pair_equal);
+  return impl_.contains<is_pair_contains, uses_vector_load()>(g, element, pair_equal);
 }
 
 template <typename Key,
